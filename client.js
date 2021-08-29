@@ -3,15 +3,15 @@ console.log('hello');
 $(document).ready(readyNow);
 
 
-
+let monthlyTotal = [];
 function readyNow() {
 $('#Submit-button').on('click',addEmployee);
 $('#tableEmployee').on('click','#delete-button',removeEmployee);
 
-    
+ 
 }
+
 function addEmployee() {
-   
 
     let firstName = $('#firstname').val();
     let lastName = $('#lastname').val();
@@ -25,8 +25,16 @@ function addEmployee() {
     <td>${title}</td>
     <td>${annualSalary}</td>
     <td><button id= "delete-button">Delete</button></td>
-    </tr>`);
-    
+    </tr>
+    `);
+   
+    monthlyTotal.push(annualSalary);
+    let total = 0;
+    for (i of monthlyTotal) {
+        total += Number(i);
+    }
+    $('#monthly-total').text(`Monthly Total: $${total}`);
+
 $('#firstname').val('');
 $('#lastname').val('');
 $('#id').val('');
@@ -35,6 +43,8 @@ $('#annualsalary').val('');
     
 }
 function removeEmployee(){
-    console.log($(this));
+    //console.log($(this));
     $(this).parent().parent().remove();
 }
+
+
